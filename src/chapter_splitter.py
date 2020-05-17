@@ -43,7 +43,7 @@ class ChapterSplitter:
                     content = ""
                 else:
                     if content_start_flag:
-                        content += line.strip().replace('“', '"').replace('”', '"') + " "
+                        content += line.strip().replace('“', '"').replace('”', '"').replace("’","'").replace("�",'') + " "
 
     def write_result(self) -> None:
         for chap, content in self.content.items():

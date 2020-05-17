@@ -1,0 +1,26 @@
+@startuml
+
+start
+
+:Pride and Prejudice;
+note right
+**Download ebook**
+======
+* Download from
+**Project Gutenberg**
+
+end note
+
+partition chapter_splitter {
+    :parse_chapter;
+    note right
+    **Split and parse ebook**
+    ======
+    * Split by chapter.
+    * Make chapter string to one sentence.
+    end note
+}
+
+end
+
+@enduml
