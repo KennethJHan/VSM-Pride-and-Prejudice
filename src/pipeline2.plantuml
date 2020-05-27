@@ -22,8 +22,19 @@ partition chapter_splitter {
     :chapter string;
 }
 
+partition test_data_maker {
+    :make_test_data(document);
+    note right
+    **Make test data**
+    ======
+    * Make test data(sentence), from each chapter.
+    * Random sentence.
+    * Random length.
+    end note
+}
+
 partition text_preprocessing {
-    :tokenization();
+    :tokenization(raw_query);
     note right
     **Tokenization chapter string**
     ======
@@ -31,7 +42,7 @@ partition text_preprocessing {
     * Make chapter string to token
     end note
 
-    :cleaning_and_normalization();
+    :cleaning_and_normalization(token);
     note right
     **Cleaning, Normalization**
     ======
@@ -41,8 +52,13 @@ partition text_preprocessing {
     end note
 }
 
-partition matrix_maker {
-    :make_tf_idf_matrix();
+partition cosine_similarity_calculator {
+    :calc_cosine_similarity(document_matrix, cleaned_token);
+    note right
+    **Calculate cosine similarity**
+    =====
+    * Between document_matrix and cleaned_token
+    end note
 }
 
 stop

@@ -1,0 +1,97 @@
+@startuml
+
+start
+
+:Pride and Prejudice;
+note right
+**Download ebook**
+======
+* Download from
+**Project Gutenberg**
+
+end note
+
+partition chapter_splitter {
+    :parse_chapter(document);
+    note right
+    **Split and parse ebook**
+    ======
+    * Split by chapter.
+    * Make chapter string to one sentence.
+    end note
+    :chapter string;
+}
+
+if () then (document)
+
+partition text_preprocessing {
+    :tokenization(raw_chapter_string);
+    note right
+    **Tokenization chapter string**
+    ======
+    * tensorflow.keras.preprocessing.text
+    * Make chapter string to token
+    end note
+
+    :cleaning_and_normalization(token);
+    note right
+    **Cleaning, Normalization**
+    ======
+    * to_lowercase
+    * Remove unnecessary words
+    (nltk stopwords.words('english'))
+    end note
+}
+
+partition matrix_maker {
+    :make_tf_idf_matrix();
+}
+
+
+else (test data)
+
+
+partition test_data_maker {
+    :make_test_data(document);
+    note right
+    **Make test data**
+    ======
+    * Make test data(sentence), from each chapter.
+    * Random sentence.
+    * Random length.
+    end note
+}
+
+partition text_preprocessing {
+    :tokenization(raw_query);
+    note right
+    **Tokenization chapter string**
+    ======
+    * tensorflow.keras.preprocessing.text
+    * Make chapter string to token
+    end note
+
+    :cleaning_and_normalization(token);
+    note right
+    **Cleaning, Normalization**
+    ======
+    * to_lowercase
+    * Remove unnecessary words
+    (nltk stopwords.words('english'))
+    end note
+}
+
+endif
+
+partition cosine_similarity_calculator {
+    :calc_cosine_similarity(document_matrix, cleaned_token);
+    note right
+    **Calculate cosine similarity**
+    =====
+    * Between document_matrix and cleaned_token
+    end note
+}
+
+stop
+
+@enduml

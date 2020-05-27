@@ -1,0 +1,28 @@
+@startuml
+class chapter_reader {
+    String read_chap(Integer)
+}
+
+class vsm_tool {
+    token_string(String) :String 
+    make_bow(List) :HashMap<String,Integer>
+    tf(String, String) :Integer
+    idf(String, List) :Double
+    tf_idf(String, String, List) :Double
+    calc_cosine_similarity(String, String) :Double
+    print_result(String, List) :void
+}
+
+class VectorSpaceModelRunner {
+    query_list
+    to_read_chap_list
+    bow
+    doc_list
+    tf_idf_result
+    read_query(String) :String
+    read_query_to_list(String) :List
+    process_query() :void
+
+
+}
+@enduml
